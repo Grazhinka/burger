@@ -6,21 +6,25 @@
     padding: 24px 0 30px;
     margin-bottom: 30px;
   }
+
+  .container{
+    margin: 0 auto;
+  }
   
-  .header__logo {
+  .logo {
     width: 150px;
     color: #fff;
     margin: 0 auto 24px;
   }
   
-  .header__wrapper {
+  .wrapper {
     padding-bottom: 246px;
     background: url('../../assets/img/pic.svg') bottom/227px no-repeat;
     text-align: center;
     color: #FFFFFF;
   }
   
-  .header__title {
+  .title {
     display: flex;
     flex-direction: column;
     font-weight: 800;
@@ -29,11 +33,11 @@
     margin-bottom: 16px;
   }
   
-  .header__red {
+  .red {
     color: #FF5C00;
   }
   
-  .header__appeal {
+  .appeal {
     font-size: 12px;
     line-height: 16px;
   }
@@ -44,11 +48,11 @@
       padding-bottom: 44px;
     }
   
-    .header__container {
+    .container {
       max-width: 480px;
     }
   
-    .header__wrapper {
+    .wrapper {
       padding-bottom: 0;
       padding-left: 180px;
       padding-top: 27px;
@@ -65,16 +69,16 @@
       background-size: 2540px;
     }
   
-    .header__container {
+    .container {
       max-width: calc(562px + var(--padding-container) * 2);
     }
   
-    .header__wrapper {
+    .wrapper {
       padding-left: 237px;
       min-height: 229px;
     }
   
-    .header__title {
+    .title {
       font-size: 36px;
       margin-bottom: 26px;
     }
@@ -87,33 +91,33 @@
       margin-bottom: 40px;
     }
   
-    .header__container {
+    .container {
       max-width: calc(764px + var(--padding-container) * 2);
     }
   
-    .header__wrapper {
+    .wrapper {
       padding-top: 46px;
       padding-left: 326px;
       min-height: 326px;
     }
   
-    .header__title {
+    .title {
       font-size: 50px;
       margin-bottom: 52px;
     }
   
-    .header__appeal {
+    .appeal {
       font-size: 16px;
       line-height: 22px;
     }
   }
   
   @media (min-width: 1360px) {
-    .header__container {
+    .container {
       max-width: calc(784px + var(--padding-container) * 2);
     }
   
-    .header__wrapper {
+    .wrapper {
       padding-left: 346px;
     }
   }
