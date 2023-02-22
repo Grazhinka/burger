@@ -48,7 +48,7 @@
   .button_active:focus {
     outline: none;
   }
-  
+ /* 
   .button_burger {
     background-image: url('../../assets/img/burger.png');
   }
@@ -84,7 +84,7 @@
   .button_sauce {
     background-image: url('../../assets/img/sauce.png');
   }
-  
+  */
   
   @media (min-width: 768px) {
     .list {

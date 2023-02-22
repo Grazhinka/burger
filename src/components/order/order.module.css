@@ -1,0 +1,192 @@
+.order {
+    position: relative;
+  }
+  
+  .wrapper {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.16);
+    border-radius: 12px;
+    padding: 16px 10px;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    outline: none;
+  }
+  
+  .header:after {
+    content: '';
+    position: absolute;
+    outline: 3px solid transparent;
+    inset: 0;
+    border-radius: 12px;
+    pointer-events: none;
+  }
+  
+  .header:focus-visible:after {
+    outline-color: #FFAB08;
+  }
+  
+  .order_open .header {
+    margin-bottom: 8px; 
+  }
+  
+  .title {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 100%;
+  }
+  
+  .count {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 14px;
+    width: 32px;
+    height: 16px;
+    background: #F2F2F3;
+    border-radius: 6px;
+  }
+  
+  .wrap_list {
+    display: none;
+  }
+  
+  .order_open .wrap_list {
+    display: block;
+  }
+  
+  .list {
+    margin-bottom: 13px;
+  }
+  
+  
+  
+
+  
+  .total {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 130%;
+    margin-bottom: 19px;
+  }
+  
+  .submit {
+    width: 100%;
+    padding: 9px;
+    background: #FF7020;
+    border-radius: 8px;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 100%;
+    color: #FFFFFF;
+    margin-bottom: 8px;
+  }
+  
+  .apeal {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .text {
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 24px;
+    padding-left: 32px;
+    background: url('../../assets/img/delivery.png') left/24px no-repeat;
+  }
+  
+  .close {
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 14px;
+    color: #B1B1B1;
+  }
+  
+  .empty {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 130%;
+  }
+  
+  @media (min-width: 768px) {
+    .order {
+      width: 145px;
+      transition: width 0.06s ease-in-out;
+    }
+  
+    .order.order_open {
+      width: 300px;
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .order {
+      width: 300px;
+    }
+  
+    .wrapper {
+      position: unset;
+      padding: 24px 16px;
+    }
+  
+    .header {
+      margin-bottom: 12px;
+      pointer-events: none;
+    }
+  
+    .header:after {
+      content: none;
+    }
+  
+    .title {
+      font-size: 24px;
+    }
+    
+  
+    .count {
+      width: 41px;
+      height: 20px;
+      font-size: 12px;
+    }
+  
+
+  
+    .wrap_list {
+      display: block;
+      margin-bottom: 16px;
+    }
+  
+    .close {
+      display: none;
+    }
+  
+    .total {
+      font-size: 16px;
+      margin-bottom: 24px;
+    }
+  
+    .submit {
+      padding: 1px;
+      height: 40px;
+      border-radius: 12px;
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+  
+    .apeal {
+      font-size: 12px;
+    }
+  }
