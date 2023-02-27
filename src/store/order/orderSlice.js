@@ -25,11 +25,12 @@ export  const localStorageMiddleware= store=> next=>action=>{
 export const orderRequestAsync=createAsyncThunk(
     'order/fetch',
     (_,{getState})=>{
-        const listId= getState().order.orderList.map(item=>item.id)
+        const listId= getState().order.orderList.map(item=>item.id);
         return fetch(`${API_URI}${POCTFIX}?list=${listId}`)
         .then(req=>req.json())
         .catch(error=>({error}));
     }
+
 )
 
 
@@ -38,13 +39,56 @@ const orderSlice= createSlice({
     initialState,
     reducers:{
         addProduct:(state,action)=>{
-            const product=state.orderList.find(item=>item.id===action.payload.id);
+            const productOrderList=state.orderList.find(item=>item.id===action.payload.id);
 
-            if(product){
-                product.count+=1;
+            if(productOrderList){
+                productOrderList.count+=1;
+                const productOrderGoods=state.orderGoods.find(
+                    item=>item.id===action.payload.id
+                );
+                productOrderGoods.count = productOrderList.count;
+                state.totalCount=state.orderGoods.reduce(
+                    (acc,item)=>acc+item.count,
+                    0,
+                );
+                state.totalPrice=state.orderGoods.reduce(
+                    (acc,item)=>acc+item.count*item.price,
+                    0,
+                );
             }else{
             state.orderList.push({...action.payload, count:1})
             }
+
+
+
+        },
+        removeProduct: (state,action)=>{
+            const productOrderList=state.orderList.find(item=>item.id===action.payload.id);
+
+            if(productOrderList.count>1){
+                productOrderList.count-=1;
+
+                const productOrderGoods=state.orderGoods.find(
+                    item=>item.id===action.payload.id
+                );
+
+                productOrderGoods.count = productOrderList.count;
+                state.totalCount=state.orderGoods.reduce(
+                    (acc,item)=>acc+item.count,
+                    0,
+                );
+                state.totalPrice=state.orderGoods.reduce(
+                    (acc,item)=>acc+item.count*item.price,
+                    0,
+                );
+            }else{
+
+            state.orderList= state.orderList.filter(item=>item.id!==action.payload.id)
+            }
+        },
+        clearOrder:(state)=>{
+             state.orderList=[];
+             state.orderGoods=[];
         }
     },
     extraReducers: builder=>{
@@ -54,23 +98,32 @@ const orderSlice= createSlice({
           })
           .addCase(orderRequestAsync.fulfilled,(state,action)=>{
             const orderGoods=state.orderList.map(item=>{
-                const product=action.payload.find(product =>product.id===item.id);
+                const product=action.payload
+                   .find(product =>product.id===item.id);
             product.count=item.count;
-            return product;
-            
-            }
-            );
+            return product;  
+            });
+
+            console.log(orderGoods)
 
             state.error='';
             state.orderGoods=orderGoods;
-            state.totalCount='88'
-            
-            
-            /*state.totalCount=orderGoods.reduce(
+            state.totalCount=orderGoods.reduce(
                 (acc,item)=>acc+item.count,
                 0,
-            );*/
-            state.totalPrice=0;
+            );
+            state.totalPrice=orderGoods.reduce(
+                (acc,item)=>acc+item.count*item.price,
+                0,
+            );
+
+            
+
+
+
+
+
+
           })
           .addCase(orderRequestAsync.rejected,(state,action)=>{
                 state.error=action.payload.error
@@ -78,6 +131,6 @@ const orderSlice= createSlice({
     }
 })
 
-export const {addProduct}=orderSlice.actions;
+export const {addProduct,removeProduct,clearOrder}=orderSlice.actions;
 export default orderSlice.reducer
 

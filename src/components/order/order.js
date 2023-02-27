@@ -3,19 +3,18 @@ import { OrderGoods } from '../orderGoods/orderGoods'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { orderRequestAsync } from '../../store/order/orderSlice'
+import { openModal } from '../../store/modalDelivery/modalDeliverySlice'
 
-const orderList=[
-  'Супер сырный', 'Картошка Фри ','Жгучий хотдог'
-]
+
 
 export const Order=()=>{
-    const {totalPrice, totalCount}=useSelector(state=>state.order)
-    const dispatch=useDispatch()
+    const {totalPrice, totalCount, orderList, orderGoods}=useSelector(state=>state.order);
+    const dispatch=useDispatch();
 
 
     useEffect(()=>{
-      dispatch(orderRequestAsync)
-    },[])
+      dispatch(orderRequestAsync())
+    },[orderList.length])
 
     return(
         <div className="order">
@@ -28,7 +27,7 @@ export const Order=()=>{
 
             <div className={style.wrap_list}>
               <ul className={style.list}>
-              {orderList.map((item,index)=> <OrderGoods key={index} title={item}/>)
+              {orderGoods.map(item=> <OrderGoods key={item.id} {...item}/>)
               }
               </ul>
 
@@ -40,7 +39,12 @@ export const Order=()=>{
                 </p>
               </div>
 
-              <button className={style.submit}>Оформить заказ</button>
+              <button disabled={orderGoods.length===0}
+              className={style.submit}
+              onClick={()=>{
+                dispatch(openModal())
+              }}
+              >Оформить заказ</button>
 
               <div className={style.apeal}>
                 <p className={style.text}>Бесплатная доставка</p>
