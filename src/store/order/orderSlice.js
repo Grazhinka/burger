@@ -64,6 +64,7 @@ const orderSlice= createSlice({
         },
         removeProduct: (state,action)=>{
             const productOrderList=state.orderList.find(item=>item.id===action.payload.id);
+            console.log(productOrderList)
 
             if(productOrderList.count>1){
                 productOrderList.count-=1;
@@ -98,12 +99,13 @@ const orderSlice= createSlice({
           })
           .addCase(orderRequestAsync.fulfilled,(state,action)=>{
             const orderGoods=state.orderList.map(item=>{
+                
                 const product=action.payload
-                   .find(product =>product.id===item.id);
+                .find(product =>product.id===item.id);
             product.count=item.count;
+            
             return product;  
             });
-
             console.log(orderGoods)
 
             state.error='';
@@ -116,13 +118,6 @@ const orderSlice= createSlice({
                 (acc,item)=>acc+item.count*item.price,
                 0,
             );
-
-            
-
-
-
-
-
 
           })
           .addCase(orderRequestAsync.rejected,(state,action)=>{
